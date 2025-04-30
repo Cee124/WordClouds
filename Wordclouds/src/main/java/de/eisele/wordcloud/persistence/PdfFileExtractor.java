@@ -5,7 +5,7 @@ import java.io.File;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 
-public class PDFFileReader {
+public class PdfFileExtractor {
 
 	public String readPDFFile(File pdfFile) {
 		String text="";
