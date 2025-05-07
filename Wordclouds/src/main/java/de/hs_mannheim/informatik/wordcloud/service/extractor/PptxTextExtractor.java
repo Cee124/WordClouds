@@ -27,7 +27,7 @@ public class PptxTextExtractor implements TextExtractor{
             }
 
         } catch (IOException e) {
-        	throw new Exception("Fehler beim Extrahieren von Text aus der PDF-Datei: " + filename, e);
+        	throw new Exception("Error extracting the text from the Pptx-File: " + filename, e);
         }
 
         return textBuilder.toString();

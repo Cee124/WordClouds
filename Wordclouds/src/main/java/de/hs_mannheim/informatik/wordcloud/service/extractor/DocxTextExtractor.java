@@ -23,7 +23,7 @@ public class DocxTextExtractor implements TextExtractor {
 			text.append(extractor.getText().trim());
 
 		} catch (IOException e) {
-			throw new Exception("Fehler beim Extrahieren des Textes aus der DOCX-Datei: " + filename, e);
+			throw new Exception("Error extracting the text from the Docx-File: " + filename, e);
 		}
 
 		return text.toString();

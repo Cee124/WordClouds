@@ -16,7 +16,7 @@ public class PdfTextExtractor implements TextExtractor {
         	text.append(pdfStripper.getText(document).trim());
         	
         	} catch (Exception e) {
-        		throw new Exception("Fehler beim Extrahieren von Text aus der PDF-Datei: " + filename, e);
+        		throw new Exception("Error extracting the text from the PDF-File: " + filename, e);
     }
         return text.toString();
 }

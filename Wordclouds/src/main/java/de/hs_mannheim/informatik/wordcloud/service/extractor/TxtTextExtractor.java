@@ -18,7 +18,7 @@ public class TxtTextExtractor implements TextExtractor {
 			}
 
 		} catch (IOException e) {
-			throw new Exception("Fehler beim Lesen der Datei: " + filename, e);
+			throw new Exception("Error extracting the text from the txt-File: " + filename, e);
 		}
 		
 		return content.toString();

@@ -23,7 +23,7 @@ public class HTMLWriter {
 				lines.add(line);
 			}
 		} catch (IOException e) {
-			throw new IOException("Fehler beim Lesen der HTML-Datei: " + e.getMessage());
+			throw new IOException("Error reading the HTML-File: " + e.getMessage());
 		}
 
 		List<String> beforeTagCloud = new ArrayList<>();
