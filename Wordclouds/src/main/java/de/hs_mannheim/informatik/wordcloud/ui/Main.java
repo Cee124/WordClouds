@@ -1,24 +1,37 @@
 package de.hs_mannheim.informatik.wordcloud.ui;
 
-import java.io.File;
 
+import de.hs_mannheim.informatik.wordcloud.domain.StopwordsManager;
 import de.hs_mannheim.informatik.wordcloud.service.*;
-import de.hs_mannheim.informatik.wordcloud.service.extractor.PdfTextExtractor;
+import de.hs_mannheim.informatik.wordcloud.service.extractor.TextExtractor;
+import de.hs_mannheim.informatik.wordcloud.service.extractor.TextExtractorFactory;
 
 public class Main {
 	public static void main(String[] args) throws Exception {
-		PdfTextExtractor extractor = new PdfTextExtractor();
-
-		File file = new File(
-				"C:\\Users\\chris\\git\\WordClouds-Repo\\Wordclouds\\src\\main\\resources\\The_Foundations_of_Geometry.pdf");
-
-		try {
-			String text = extractor.extractText(file);
-			System.out.println(text);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		
+		String filename = "C:\\Users\\chris\\git\\WordClouds-Repo\\Wordclouds\\src\\main\\resources\\input.txt";
+		String outputHtmlPath = "C:\\Users\\chris\\git\\WordClouds-Repo\\Wordclouds\\src\\main\\resources\\PR2 Wordcloud.html";
+		TextExtractor textExtractor = TextExtractorFactory.getExtractor(filename);
+		StopwordsManager stopwordsManager = new StopwordsManager();
+		
+		Tokenizer tokenizer = new Tokenizer(stopwordsManager);
+		
+		TextProcessingService textProcessingService = new TextProcessingService(textExtractor, stopwordsManager, tokenizer);
+		
+		textProcessingService.processText(filename, outputHtmlPath);
+		
+		System.out.println("Die Wordcloud wurde erstellt");
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 
 	}
 }
