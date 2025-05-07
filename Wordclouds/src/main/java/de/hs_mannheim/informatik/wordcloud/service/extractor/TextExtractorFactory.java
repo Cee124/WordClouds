@@ -1,14 +1,12 @@
 package de.hs_mannheim.informatik.wordcloud.service.extractor;
 
-import java.io.File;
 
-import de.hs_mannheim.informatik.wordcloud.domain.TextExtractor;
 
 public class TextExtractorFactory {
 
-	public static TextExtractor getExtractor(File file) {
+	public static TextExtractor getExtractor(String filename) {
 
-		String fileName = file.getName().toLowerCase();
+		String fileName = filename.toLowerCase();
 
 		if (fileName.endsWith(".pdf")) {
 			return new PdfTextExtractor();
