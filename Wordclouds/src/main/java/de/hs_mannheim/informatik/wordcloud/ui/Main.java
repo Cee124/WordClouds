@@ -18,7 +18,7 @@ public class Main {
 		String language = "german";
 		boolean showFrequencies = true;
 		int minimumFrequencies = 1;
-		
+		boolean sortFrequencies = false;
 		try {
 			
 			stopword.loadStopwordsFromFile(stopwordsFile);
@@ -28,7 +28,7 @@ public class Main {
 			
 			TextProcessor textProcess = new TextProcessor(filename, stopword, language);
 			
-			textProcess.processFiles(filename, outputHtmlPath, showFrequencies, minimumFrequencies);
+			textProcess.processFiles(filename, outputHtmlPath, showFrequencies, minimumFrequencies, sortFrequencies);
 
 			
 			Runtime.getRuntime().exec(new String[] { "cmd", "/c", "start", "\"\"", outputHtmlPath });

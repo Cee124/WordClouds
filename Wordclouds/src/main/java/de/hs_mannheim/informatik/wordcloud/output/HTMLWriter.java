@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class HTMLWriter {
 
-	public void writeTagCloud(String outputHtmlPath, HashMap<String, Integer> wordFrequency, boolean showFrequencies, int minimumFrequency) throws IOException {
+	public void writeTagCloud(String outputHtmlPath, Map<String, Integer> wordFrequency, boolean showFrequencies, int minimumFrequency) throws IOException {
 
 		ArrayList<String> lines = new ArrayList<>();
 
