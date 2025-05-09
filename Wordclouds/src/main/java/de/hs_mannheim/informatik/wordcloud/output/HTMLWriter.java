@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class HTMLWriter {
 
-	public void writeTagCloud(String outputHtmlPath, HashMap<String, Integer> wordFrequency) throws IOException {
+	public void writeTagCloud(String outputHtmlPath, HashMap<String, Integer> wordFrequency, boolean showFrequencies, int minimumFrequency) throws IOException {
 
 		ArrayList<String> lines = new ArrayList<>();
 
@@ -55,13 +55,22 @@ public class HTMLWriter {
 			}
 
 			int id = 1;
+			
 			for (String word : wordFrequency.keySet()) {
 				StringBuilder builder = new StringBuilder();
+				int frequency = wordFrequency.get(word);
+				if(frequency < minimumFrequency) {
+					continue;
+				} 
 				String weight = getClassForWeight(wordFrequency.get(word));
 				String url = "https://www.google.com/search?q=" + word;
 
 				builder.append("<span id=\"").append(id++).append("\" class=\"wrd ").append(weight)
 						.append("\"><a href=\"").append(url).append("\">").append(word).append("</a></span>");
+				
+				if(showFrequencies) {
+					builder.append(" " + wordFrequency.get(word));
+				}
 
 				writer.write(builder.toString());
 				writer.newLine();

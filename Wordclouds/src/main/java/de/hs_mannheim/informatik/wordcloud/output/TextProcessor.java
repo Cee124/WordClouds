@@ -24,7 +24,7 @@ public class TextProcessor {
 		this.folderExtract = new FolderExtractor();
 	}
 
-	public void processFiles(String filename, String outputHtml) throws Exception {
+	public void processFiles(String filename, String outputHtml, boolean showFrequencies, int minimumFrequencies) throws Exception {
 		String lines = "";
 		ArrayList<String> tokenizedWords = new ArrayList<>();
 		ArrayList<String> allFiles = folderExtract.getAllFiles(filename);
@@ -42,7 +42,7 @@ public class TextProcessor {
 				wordFrequency.addFrequencies(tokenizedWords);
 				
 				HTMLWriter writer = new HTMLWriter();
-				writer.writeTagCloud(outputHtml, wordFrequency.getWordFrequencies());
+				writer.writeTagCloud(outputHtml, wordFrequency.getWordFrequencies(), showFrequencies, minimumFrequencies);
 				System.out.println("Die WordCloud wurde somit erstellt");
 				
 			}
