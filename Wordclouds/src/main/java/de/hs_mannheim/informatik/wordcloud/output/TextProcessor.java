@@ -16,11 +16,11 @@ public class TextProcessor {
 	private Tokenizer tokenizer;
 	private FileValidater validate;
 	private FolderExtractor folderExtract;
-	public TextProcessor(String filename, Stopwords stopwords) {
+	public TextProcessor(String filename, Stopwords stopwords, String language) {
 		this.setFilename(filename);
 		this.setStopwords(stopwords);
 		this.validate=new FileValidater();
-		this.tokenizer=new Tokenizer(stopwords);
+		this.tokenizer=new Tokenizer(stopwords, language);
 		this.folderExtract = new FolderExtractor();
 	}
 

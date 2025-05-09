@@ -9,7 +9,7 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 
-		String filename = "C:\\Users\\chris\\eclipse-workspace\\WordCloud\\src\\main\\resource";
+		String filename = "C:\\Users\\chris\\git\\WordClouds-Repo\\WordClouds-Repo\\Wordclouds\\src\\main\\resources";
 
 		String stopwordsFile = "C:\\Users\\chris\\eclipse-workspace\\WordCloud\\src\\main\\resources\\stopwords.txt";
 		try {
@@ -18,8 +18,9 @@ public class Main {
 
 		stopword.addStopword();
 
-		String outputHtmlPath = "C:\\Users\\chris\\eclipse-workspace\\WordCloud\\src\\main\\resources\\PR2 Wordcloud.html";
-		TextProcessor textProcess = new TextProcessor(filename, stopword);
+		String outputHtmlPath = "C:\\Users\\chris\\git\\WordClouds-Repo\\WordClouds-Repo\\Wordclouds\\src\\main\\resources\\PR2 Wordcloud.html";
+		String language = "german";
+		TextProcessor textProcess = new TextProcessor(filename, stopword, language);
 		
 		
 		textProcess.processFiles(filename, outputHtmlPath);
