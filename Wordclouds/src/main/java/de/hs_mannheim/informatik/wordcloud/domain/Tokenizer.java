@@ -1,22 +1,20 @@
-package de.hs_mannheim.informatik.wordcloud.service;
+package de.hs_mannheim.informatik.wordcloud.domain;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.de.GermanAnalyzer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
-import de.hs_mannheim.informatik.wordcloud.domain.StopwordsManager;
 import org.apache.lucene.analysis.TokenStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class Tokenizer {
 
-	private StopwordsManager stopwordsManager;
+	private Stopwords stopwordsManager;
 
-	public Tokenizer(StopwordsManager stopwordsManager) {
+	public Tokenizer(Stopwords stopwordsManager) {
 		this.stopwordsManager = stopwordsManager;
 	}
 
-	// Methode zum Tokenisieren und Filtern der Stoppwörter
 	public ArrayList<String> tokenize(String text) {
 		ArrayList<String> tokens = new ArrayList<>();
 

@@ -9,9 +9,9 @@ import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
 
 
-public class DocxTextExtractor implements TextExtractor {
+public class DocxTextExtractor {
 
-	@Override
+	
 	public String extractText(String filename) throws Exception {
 		StringBuilder text = new StringBuilder();
 		File file = new File(filename);

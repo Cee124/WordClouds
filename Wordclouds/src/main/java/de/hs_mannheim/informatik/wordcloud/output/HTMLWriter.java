@@ -6,15 +6,15 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class HTMLWriter {
 
-	public static void writeTagCloud(String filename, String outputHtmlPath,
-			HashMap<String, Integer> wordFrequency) throws IOException {
-		List<String> lines = new ArrayList<>();
+	public void writeTagCloud(String outputHtmlPath, HashMap<String, Integer> wordFrequency) throws IOException {
+
+		ArrayList<String> lines = new ArrayList<>();
 
 		// HTML-Template-Datei einlesen
 		try (BufferedReader reader = new BufferedReader(new FileReader(outputHtmlPath))) {
@@ -26,7 +26,7 @@ public class HTMLWriter {
 			throw new IOException("Error reading the HTML-File: " + e.getMessage());
 		}
 
-		List<String> beforeTagCloud = new ArrayList<>();
+		ArrayList<String> beforeTagCloud = new ArrayList<>();
 		boolean foundPlaceholder = false;
 
 		for (String line : lines) {

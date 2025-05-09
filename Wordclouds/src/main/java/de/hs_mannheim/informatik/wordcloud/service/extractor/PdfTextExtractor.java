@@ -4,10 +4,8 @@ import java.io.File;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 
-public class PdfTextExtractor implements TextExtractor {
-
-    @Override
-    public String extractText(String filename) throws Exception {
+public class PdfTextExtractor {
+	public String extractText(String filename) throws Exception {
     	File file = new File(filename);
         StringBuilder text = new StringBuilder();
 
@@ -21,3 +19,5 @@ public class PdfTextExtractor implements TextExtractor {
         return text.toString();
 }
 }
+
+
