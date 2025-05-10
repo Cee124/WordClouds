@@ -3,7 +3,7 @@ package de.hs_mannheim.informatik.wordcloud.ui;
 import java.io.IOException;
 
 import de.hs_mannheim.informatik.wordcloud.domain.Stopwords;
-import de.hs_mannheim.informatik.wordcloud.output.TextProcessor;
+import de.hs_mannheim.informatik.wordcloud.output.FileProcessor;
 
 public class Main {
 
@@ -15,10 +15,10 @@ public class Main {
 		String stopwordsFile = "C:\\Users\\chris\\eclipse-workspace\\WordCloud\\src\\main\\resources\\stopwords.txt";
 		Stopwords stopword = new Stopwords();
 		String outputHtmlPath = "C:\\Users\\chris\\git\\WordClouds-Repo\\WordClouds-Repo\\Wordclouds\\src\\main\\resources\\PR2Wordcloud.html";
-		String language = "german";
+		String language = "english";
 		boolean showFrequencies = true;
-		int minimumFrequencies = 1;
-		boolean sortFrequencies = false;
+		int minimumFrequencies = 35;
+		boolean sortFrequencies = true;
 		try {
 			
 			stopword.loadStopwordsFromFile(stopwordsFile);
@@ -26,7 +26,7 @@ public class Main {
 
 			
 			
-			TextProcessor textProcess = new TextProcessor(filename, stopword, language);
+			FileProcessor textProcess = new FileProcessor(filename, stopword, language);
 			
 			textProcess.processFiles(filename, outputHtmlPath, showFrequencies, minimumFrequencies, sortFrequencies);
 

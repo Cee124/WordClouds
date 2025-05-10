@@ -3,19 +3,18 @@ package de.hs_mannheim.informatik.wordcloud.domain;
 import java.util.ArrayList;
 
 import java.util.HashMap;
-
+import java.util.Map;
 import java.util.TreeMap;
 
 public class WordFrequency {
 
-	private static HashMap<String, Integer> wordFrequencies;
-	private static TreeMap<String, Integer> sortedWordFrequencies;
+	private final  Map<String, Integer> wordFrequencies = new HashMap<>();
+	
 	public WordFrequency() {
-		wordFrequencies = new HashMap<>();
-		sortedWordFrequencies = new TreeMap<>();
+		
 	}
 
-	public HashMap<String, Integer> getWordFrequencies() {
+	public Map<String, Integer> getWordFrequencies() {
 		return wordFrequencies;
 	}
 
@@ -23,13 +22,13 @@ public class WordFrequency {
 		for (String w : words) {
 
 			wordFrequencies.put(w, wordFrequencies.getOrDefault(w, 0) + 1);
-			sortedWordFrequencies.put(w, sortedWordFrequencies.getOrDefault(w, 0)+1);
+			
 		}
 
 	}
 	
-	public TreeMap<String, Integer> getSortedWordFrequencies() {
-		return sortedWordFrequencies;
+	public Map<String, Integer> getSortedWordFrequencies() {
+		return new TreeMap<>(wordFrequencies);
 	}
 
 }

@@ -10,7 +10,7 @@ import de.hs_mannheim.informatik.wordcloud.domain.Tokenizer;
 import de.hs_mannheim.informatik.wordcloud.domain.WordFrequency;
 import de.hs_mannheim.informatik.wordcloud.service.extractor.*;
 
-public class TextProcessor {
+public class FileProcessor {
 
 	private String filename;
 	private Stopwords stopwords;
@@ -18,7 +18,7 @@ public class TextProcessor {
 	private FileValidater validate;
 	private FolderExtractor folderExtract;
 
-	public TextProcessor(String filename, Stopwords stopwords, String language) {
+	public FileProcessor(String filename, Stopwords stopwords, String language) {
 		this.setFilename(filename);
 		this.setStopwords(stopwords);
 		this.validate = new FileValidater();
