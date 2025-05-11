@@ -28,22 +28,25 @@ public class FileProcessor {
 
 	public void processFiles(String filename, String outputHtml, boolean showFrequencies, int minimumFrequencies,
 			boolean sortFrequencies) throws Exception {
-		String lines = "";
-		ArrayList<String> tokenizedWords = new ArrayList<>();
+		
+	
 		ArrayList<String> allFiles = folderExtract.getAllFiles(filename);
+		WordFrequency wordFrequency = new WordFrequency();
 		for (String filepath : allFiles) {
 			if (!validate.isValid(filepath)) {
-
 				System.out.println("Ungültiges Dateiformat");
-
-			} else {
+				continue;
+			} 
 
 				PickTextExtractor extractor = new PickTextExtractor();
-				lines = extractor.textExtractor(filepath);
+				String lines = extractor.textExtractor(filepath);
+				ArrayList<String> tokenizedWords = tokenizer.tokenize(lines);
 				tokenizedWords = tokenizer.tokenize(lines);
-				WordFrequency wordFrequency = new WordFrequency();
+
 				wordFrequency.addFrequencies(tokenizedWords);
-				
+		}
+		
+		
 				Map<String, Integer> wordFrequencies = new HashMap<>();
 				if (sortFrequencies) {
 					wordFrequencies = wordFrequency.getSortedWordFrequencies();
@@ -53,14 +56,13 @@ public class FileProcessor {
 				}
 
 				HTMLWriter writer = new HTMLWriter();
-				writer.writeTagCloud(outputHtml, wordFrequencies, showFrequencies,
-						minimumFrequencies);
+				writer.writeTagCloud(outputHtml, wordFrequencies, showFrequencies, minimumFrequencies);
 				System.out.println("Die WordCloud wurde somit erstellt");
 
 			}
-		}
+		
 
-	}
+	
 
 	public Stopwords getStopwords() {
 		return stopwords;
