@@ -1,6 +1,5 @@
 package de.hs_mannheim.informatik.wordcloud.service.extractor;
 
-import de.hs_mannheim.informatik.wordcloud.domain.FileValidater;
 import java.io.File;
 import java.util.ArrayList;
 

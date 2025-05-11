@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.hs_mannheim.informatik.wordcloud.domain.FileValidater;
 import de.hs_mannheim.informatik.wordcloud.domain.Stopwords;
 import de.hs_mannheim.informatik.wordcloud.domain.Tokenizer;
 import de.hs_mannheim.informatik.wordcloud.domain.WordFrequency;

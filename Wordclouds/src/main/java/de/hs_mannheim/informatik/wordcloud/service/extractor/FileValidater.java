@@ -1,4 +1,4 @@
-package de.hs_mannheim.informatik.wordcloud.domain;
+package de.hs_mannheim.informatik.wordcloud.service.extractor;
 
 
 
