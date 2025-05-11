@@ -13,7 +13,7 @@ public class StopwordsLoader {
 		try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
 			String line;
 			while ((line = reader.readLine()) != null) {
-				String word = line.trim().toLowerCase();
+				String word = line.trim();
 				if (!word.isEmpty()) {
 					stopwordsFromFile.add(word);
 				}

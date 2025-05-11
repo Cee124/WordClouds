@@ -1,6 +1,5 @@
 package de.hs_mannheim.informatik.wordcloud.domain;
 
-import java.util.ArrayList;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,14 +17,12 @@ public class WordFrequency {
 		return wordFrequencies;
 	}
 
-	public void addFrequencies(ArrayList<String> words) {
-		for (String w : words) {
+	public void addFrequencies(String word) {
+        wordFrequencies.put(word, wordFrequencies.getOrDefault(word, 0) + 1);
+    }
 
-			wordFrequencies.put(w, wordFrequencies.getOrDefault(w, 0) + 1);
-			
-		}
 
-	}
+	
 	
 	public Map<String, Integer> getSortedWordFrequencies() {
 		return new TreeMap<>(wordFrequencies);

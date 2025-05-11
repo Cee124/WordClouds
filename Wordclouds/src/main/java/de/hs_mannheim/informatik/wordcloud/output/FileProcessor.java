@@ -16,50 +16,68 @@ public class FileProcessor {
 	private Tokenizer tokenizer;
 	private FileValidater validate;
 	private FolderExtractor folderExtract;
+	private WordFrequency wordFrequency;
 
 	public FileProcessor(String filename, Stopwords stopwords, String language) {
-		this.setFilename(filename);
-		this.setStopwords(stopwords);
+		this.filename = filename;
+		this.stopwords = stopwords;
 		this.validate = new FileValidater();
-		this.tokenizer = new Tokenizer(stopwords, language);
+		this.wordFrequency = new WordFrequency();
+		this.tokenizer = new Tokenizer(stopwords, language, this.wordFrequency);
 		this.folderExtract = new FolderExtractor();
 	}
 
 	public void processFiles(String filename, String outputHtml, boolean showFrequencies, int minimumFrequencies,
-			boolean sortFrequencies) throws Exception {
-		
-	
+			boolean sortFrequencies, boolean toLowercase, boolean groupWords) throws Exception {
+
 		ArrayList<String> allFiles = folderExtract.getAllFiles(filename);
-		WordFrequency wordFrequency = new WordFrequency();
+
 		for (String filepath : allFiles) {
 			if (!validate.isValid(filepath)) {
-				System.out.println("Ungültiges Dateiformat");
+				System.out.println("Ungültiges Dateiformat: " + filepath);
 				continue;
-			} 
-
-				PickTextExtractor extractor = new PickTextExtractor();
-				String lines = extractor.textExtractor(filepath);
-				ArrayList<String> tokenizedWords = tokenizer.tokenize(lines);
-				tokenizedWords = tokenizer.tokenize(lines);
-
-				wordFrequency.addFrequencies(tokenizedWords);
-		}
-		
-		
-				Map<String, Integer> wordFrequencies = new HashMap<>();
-				if (sortFrequencies) {
-					wordFrequencies = wordFrequency.getSortedWordFrequencies();
-
-				} else {
-					wordFrequencies = wordFrequency.getWordFrequencies();
-				}
-
-				HTMLWriter writer = new HTMLWriter();
-				writer.writeTagCloud(outputHtml, wordFrequencies, showFrequencies, minimumFrequencies);
-				System.out.println("Die WordCloud wurde somit erstellt");
-
 			}
+
+			PickTextExtractor extractor = new PickTextExtractor();
+			String text = extractor.textExtractor(filepath);
+
+			if (groupWords) {
+				tokenizer.tokenize(text, toLowercase);
+			} else {
+				processWithoutStemming(text, toLowercase);
+			}
+
+		}
+
 		
+		Map<String, Integer> wordFrequencies;
+		if (sortFrequencies) {
+			wordFrequencies = wordFrequency.getSortedWordFrequencies();
+		} else {
+			wordFrequencies = wordFrequency.getWordFrequencies();
+		}
+
+	
+
+		HTMLWriter writer = new HTMLWriter();
+		writer.writeTagCloud(outputHtml, wordFrequencies, showFrequencies, minimumFrequencies);
+		System.out.println("Die WordCloud wurde erstellt.");
+	}
+
+	private void processWithoutStemming(String text, boolean toLowercase) {
+		if (toLowercase) {
+			text = text.toLowerCase();
+		}
+
+		String[] tokens = text.split("[^\\p{IsAlphabetic}]+");
+
+		for (String token : tokens) {
+			if (token.isEmpty() || stopwords.isStopword(token)) {
+				continue;
+			}
+			wordFrequency.addFrequencies(token);
+		}
+	}
 
 	
 
@@ -78,5 +96,4 @@ public class FileProcessor {
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
-
 }

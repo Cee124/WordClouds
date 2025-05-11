@@ -6,34 +6,38 @@ import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.TokenStream;
 import java.io.IOException;
-import java.util.ArrayList;
+
 
 public class Tokenizer {
 
 	private Stopwords stopwordsManager;
-
+	private WordFrequency wordFrequency;
 	private String language;
-	public Tokenizer(Stopwords stopwordsManager, String language) {
-		
+
+	public Tokenizer(Stopwords stopwordsManager, String language, WordFrequency wordFrequency) {
 		this.stopwordsManager = stopwordsManager;
 		this.language = language;
-		
+		this.wordFrequency = wordFrequency; 
 	}
 
-	public ArrayList<String> tokenize(String text) {
-		ArrayList<String> tokens = new ArrayList<>();
-		Analyzer analyzer = language.equalsIgnoreCase("german") ? new GermanAnalyzer() : new EnglishAnalyzer();
-		try (TokenStream tokenStream = analyzer.tokenStream(null, text)) {
-			
-			CharTermAttribute termAttribute = tokenStream.addAttribute(CharTermAttribute.class);
+	public void tokenize(String text, boolean toLowercase) {
+		
+		if (toLowercase) {
+			text = text.toLowerCase();
+		}
 
+		Analyzer analyzer = language.equalsIgnoreCase("german") ? new GermanAnalyzer() : new EnglishAnalyzer();
+
+		try (TokenStream tokenStream = analyzer.tokenStream(null, text)) {
+
+			CharTermAttribute termAttribute = tokenStream.addAttribute(CharTermAttribute.class);
 			tokenStream.reset();
 			while (tokenStream.incrementToken()) {
 				String token = termAttribute.toString();
 
 				if (!stopwordsManager.isStopword(token)) {
-
-					tokens.add(token);
+					wordFrequency.addFrequencies(token); 
+				
 				}
 			}
 
@@ -41,8 +45,18 @@ public class Tokenizer {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
 
-		return tokens;
+
+
+	
+
+	public WordFrequency getWordFrequency() {
+		return wordFrequency;
+	}
+
+	public void setWordFrequency(WordFrequency wordFrequency) {
+		this.wordFrequency = wordFrequency;
 	}
 
 	public String getLanguage() {
@@ -52,6 +66,4 @@ public class Tokenizer {
 	public void setLanguage(String language) {
 		this.language = language;
 	}
-
-	
 }

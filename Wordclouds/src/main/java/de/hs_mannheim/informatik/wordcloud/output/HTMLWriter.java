@@ -41,10 +41,6 @@ public class HTMLWriter {
 			}
 		}
 
-		if (!foundPlaceholder) {
-			throw new IOException(
-					"Platzhalter <!-- TODO: Hier die generierten Tags einsetzen --> wurde nicht gefunden.");
-		}
 
 		// Datei neu schreiben
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputHtmlPath))) {
@@ -87,17 +83,17 @@ public class HTMLWriter {
 
 	private String getClassForWeight(int weight) {
 
-		if (weight >= 50) {
+		if (weight >= 100) {
 			return "tagcloud10";
-		} else if (weight >= 45) {
+		} else if (weight >= 80) {
 			return "tagcloud9";
-		} else if (weight >= 40) {
+		} else if (weight >= 60) {
 			return "tagcloud8";
-		} else if (weight >= 35) {
+		} else if (weight >= 50) {
 			return "tagcloud7";
-		} else if (weight >= 30) {
+		} else if (weight >= 40) {
 			return "tagcloud6";
-		} else if (weight >= 25) {
+		} else if (weight >= 30) {
 			return "tagcloud5";
 		} else if (weight >= 20) {
 			return "tagcloud4";
