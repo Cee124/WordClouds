@@ -89,7 +89,7 @@ public class HTMLWriter {
 
 		if (weight >= 50) {
 			return "tagcloud10";
-		} else if (weight >= 50) {
+		} else if (weight >= 45) {
 			return "tagcloud9";
 		} else if (weight >= 40) {
 			return "tagcloud8";

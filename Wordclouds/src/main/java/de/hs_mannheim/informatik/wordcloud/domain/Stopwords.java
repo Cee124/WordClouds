@@ -24,8 +24,6 @@ public class Stopwords {
 					stopwords.add(word);
 				}
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 
