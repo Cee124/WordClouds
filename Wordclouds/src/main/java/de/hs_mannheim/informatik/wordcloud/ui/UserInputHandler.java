@@ -3,10 +3,13 @@ package de.hs_mannheim.informatik.wordcloud.ui;
 import java.io.File;
 import java.util.Scanner;
 
+import de.hs_mannheim.informatik.wordcloud.domain.Stopwords;
 import de.hs_mannheim.informatik.wordcloud.facade.WordCloudGenerator;
+import de.hs_mannheim.informatik.wordcloud.service.loader.StopwordsLoader;
 
 public class UserInputHandler {
-	private static final String outputHtmlPath = "C:\\Users\\chris\\git\\WordClouds-Repo\\WordClouds-Repo\\Wordclouds\\src\\main\\resources\\PR2Wordcloud.html"; 
+	private static final String outputHtmlPath = "C:\\Users\\chris\\git\\WordClouds-Repo\\WordClouds-Repo\\Wordclouds\\src\\main\\resources\\PR2Wordcloud.html";
+	private static final String stopwordsFile = "C:\\\\Users\\\\chris\\\\eclipse-workspace\\\\WordCloud\\\\src\\\\main\\\\resources\\\\stopwords.txt"; 
 	public void startFromConsole() {
 		Scanner in = new Scanner(System.in);
 		try {
@@ -24,20 +27,6 @@ public class UserInputHandler {
 				}
 			}
 
-			String stopwordsFile;
-			while (true) {
-				System.out.print("Gib den Pfad zur Stopwort-Datei ein: ");
-				stopwordsFile = in.nextLine().trim();
-
-				File file = new File(stopwordsFile);
-				if (file.exists() && file.isFile()) {
-					break; 
-				} else {
-					System.out.println("Ungültiger Pfad. Bitte gib eine existierende Datei an.");
-				}
-			}
-
-
 			String language = "";
 			while (true) {
 				System.out.print("Bitte gib die Sprache für die WordCloud ein ('English' oder 'German'): ");
@@ -45,7 +34,7 @@ public class UserInputHandler {
 				if (language.equalsIgnoreCase("English") || language.equalsIgnoreCase("German")) {
 					break;
 				} else {
-				System.out.println("Ungültige Eingabe. Bitte gib entweder 'English' oder 'German' ein.");
+					System.out.println("Ungültige Eingabe. Bitte gib entweder 'English' oder 'German' ein.");
 				}
 			}
 
@@ -60,7 +49,7 @@ public class UserInputHandler {
 					showFrequencies = false;
 					break;
 				} else {
-				System.out.println("Ungültige Eingabe. Bitte gib 'ja' oder 'nein' ein.");
+					System.out.println("Ungültige Eingabe. Bitte gib 'ja' oder 'nein' ein.");
 				}
 			}
 
@@ -72,7 +61,7 @@ public class UserInputHandler {
 					if (minFreq > 0) {
 						break;
 					} else {
-					System.out.println("Die Häufigkeit muss eine positive Zahl sein.");
+						System.out.println("Die Häufigkeit muss eine positive Zahl sein.");
 					}
 				} catch (NumberFormatException e) {
 					System.out.println("Ungültige Eingabe. Bitte gib eine ganze Zahl ein.");
@@ -90,7 +79,7 @@ public class UserInputHandler {
 					sortFreq = false;
 					break;
 				} else {
-				System.out.println("Ungültige Eingabe. Bitte gib 'ja' oder 'nein' ein.");
+					System.out.println("Ungültige Eingabe. Bitte gib 'ja' oder 'nein' ein.");
 				}
 			}
 
@@ -105,7 +94,7 @@ public class UserInputHandler {
 					toLowercase = false;
 					break;
 				} else {
-				System.out.println("Ungültige Eingabe. Bitte gib 'ja' oder 'nein' ein.");
+					System.out.println("Ungültige Eingabe. Bitte gib 'ja' oder 'nein' ein.");
 				}
 			}
 
@@ -120,14 +109,41 @@ public class UserInputHandler {
 					groupWords = false;
 					break;
 				} else {
-				System.out.println("Ungültige Eingabe. Bitte gib 'ja' oder 'nein' ein.");
+					System.out.println("Ungültige Eingabe. Bitte gib 'ja' oder 'nein' ein.");
 				}
 			}
 
-			
+			Stopwords stopwords = new Stopwords();
+			StopwordsLoader.loadStopwordsFromFile(stopwordsFile, stopwords);
+			while (true) {
+				System.out.print("Gebe Stopwörter ein. Die Eingabe wird beendet, wenn du '1' eingibst: ");
+				String line = in.nextLine();
+				if (line.equals("1")) {
+					System.out.println("Stopwörter hinzugefügt.");
+					break;
+				}
+				stopwords.getStopwords().add(line.trim());
+			}
+
+			int maxWords;
+			while (true) {
+				System.out.print("Gebe die Anzahl der Wörter an, die angezeigt werden sollen: ");
+				try {
+					maxWords = Integer.parseInt(in.nextLine().trim());
+					if (maxWords > 0) {
+						break;
+					} else {
+						System.out.println("Die Anzahl muss eine positive Zahl sein.");
+					}
+				} catch (NumberFormatException e) {
+					System.out.println("Ungültige Eingabe. Bitte gib eine ganze Zahl ein.");
+				}
+
+			}
+
 			WordCloudGenerator generator = new WordCloudGenerator();
-			generator.generate(folderPath, stopwordsFile, outputHtmlPath, language, showFrequencies, minFreq, sortFreq,
-					toLowercase, groupWords);
+			generator.generate(folderPath, stopwords, outputHtmlPath, language, showFrequencies, minFreq, sortFreq,
+					toLowercase, groupWords, maxWords);
 
 			System.out.println("Die WordCloud wurde erfolgreich erstellt!");
 		} catch (Exception e) {

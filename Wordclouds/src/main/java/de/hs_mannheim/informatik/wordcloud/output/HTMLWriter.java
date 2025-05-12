@@ -12,7 +12,8 @@ import java.util.Map;
 
 public class HTMLWriter {
 
-	public void writeTagCloud(String outputHtmlPath, Map<String, Integer> wordFrequency, boolean showFrequencies, int minimumFrequency) throws IOException {
+	public void writeTagCloud(String outputHtmlPath, Map<String, Integer> wordFrequency, boolean showFrequencies,
+			int minimumFrequency, int maxWords) throws IOException {
 
 		ArrayList<String> lines = new ArrayList<>();
 
@@ -41,7 +42,6 @@ public class HTMLWriter {
 			}
 		}
 
-
 		// Datei neu schreiben
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputHtmlPath))) {
 			// Alles vor dem Platzhalter schreiben
@@ -51,25 +51,30 @@ public class HTMLWriter {
 			}
 
 			int id = 1;
-			
+			int count = 0;
 			for (String word : wordFrequency.keySet()) {
 				StringBuilder builder = new StringBuilder();
 				int frequency = wordFrequency.get(word);
-				if(frequency < minimumFrequency) {
+				if (frequency < minimumFrequency) {
 					continue;
-				} 
+				}
 				String weight = getClassForWeight(wordFrequency.get(word));
 				String url = "https://www.google.com/search?q=" + word;
 
 				builder.append("<span id=\"").append(id++).append("\" class=\"wrd ").append(weight)
 						.append("\"><a href=\"").append(url).append("\">").append(word).append("</a></span>");
-				
-				if(showFrequencies) {
-					builder.append(" " + wordFrequency.get(word));
+
+				if (showFrequencies) {
+					builder.append(" (" + wordFrequency.get(word) + ")");
 				}
 
 				writer.write(builder.toString());
 				writer.newLine();
+				
+
+				if (++count >= maxWords) {
+					break;
+				}
 			}
 
 			writer.write("</div>");

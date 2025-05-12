@@ -8,6 +8,7 @@ import de.hs_mannheim.informatik.wordcloud.domain.Stopwords;
 import de.hs_mannheim.informatik.wordcloud.domain.Tokenizer;
 import de.hs_mannheim.informatik.wordcloud.domain.WordFrequency;
 import de.hs_mannheim.informatik.wordcloud.service.extractor.*;
+import de.hs_mannheim.informatik.wordcloud.service.tokenizer.LuceneTokenizer;
 
 public class FileProcessor {
 
@@ -27,8 +28,8 @@ public class FileProcessor {
 		this.folderExtract = new FolderExtractor();
 	}
 
-	public void processFiles(String filename, String outputHtml, boolean showFrequencies, int minimumFrequencies,
-			boolean sortFrequencies, boolean toLowercase, boolean groupWords) throws Exception {
+	public void processFiles(String outputHtml, boolean showFrequencies, int minimumFrequencies,
+			boolean sortFrequencies, boolean toLowercase, boolean groupWords, int maxWords) throws Exception {
 
 		ArrayList<String> allFiles = folderExtract.getAllFiles(filename);
 
@@ -42,7 +43,8 @@ public class FileProcessor {
 			String text = extractor.textExtractor(filepath);
 
 			if (groupWords) {
-				tokenizer.tokenize(text, toLowercase);
+				LuceneTokenizer.tokenize(tokenizer, text, toLowercase);
+				
 			} else {
 				processWithoutStemming(text, toLowercase);
 			}
@@ -60,8 +62,8 @@ public class FileProcessor {
 	
 
 		HTMLWriter writer = new HTMLWriter();
-		writer.writeTagCloud(outputHtml, wordFrequencies, showFrequencies, minimumFrequencies);
-		System.out.println("Die WordCloud wurde erstellt.");
+		writer.writeTagCloud(outputHtml, wordFrequencies, showFrequencies, minimumFrequencies, maxWords);
+		
 	}
 
 	private void processWithoutStemming(String text, boolean toLowercase) {
