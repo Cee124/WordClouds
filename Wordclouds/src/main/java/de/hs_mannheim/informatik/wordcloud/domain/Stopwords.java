@@ -14,15 +14,17 @@ public class Stopwords {
 
 
 
-	public boolean isStopword(String word) {
-		return stopwords.contains(word.toLowerCase());
-	}
+	
 
 	public ArrayList<String> getStopwords() {
 		return stopwords;
 	}
 	
 	public void addStopword(String word) {
-		stopwords.add(word);
+		stopwords.add(word.toLowerCase());
+	}
+	
+	public boolean isStopword(String word) {
+		return stopwords.contains(word.toLowerCase());
 	}
 }
