@@ -88,17 +88,17 @@ public class HTMLWriter {
 
 	private String getClassForWeight(int weight) {
 
-		if (weight >= 100) {
+		if (weight >= 50) {
 			return "tagcloud10";
-		} else if (weight >= 80) {
+		} else if (weight >= 45) {
 			return "tagcloud9";
-		} else if (weight >= 60) {
-			return "tagcloud8";
-		} else if (weight >= 50) {
-			return "tagcloud7";
 		} else if (weight >= 40) {
-			return "tagcloud6";
+			return "tagcloud8";
+		} else if (weight >= 35) {
+			return "tagcloud7";
 		} else if (weight >= 30) {
+			return "tagcloud6";
+		} else if (weight >= 25) {
 			return "tagcloud5";
 		} else if (weight >= 20) {
 			return "tagcloud4";
