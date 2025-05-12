@@ -1,33 +1,33 @@
 package de.hs_mannheim.informatik.wordcloud.output;
 
+import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Map;
 
 public class CSVWriter {
 
 	public void writeWordFrequenciesToCSV(Map<String, Integer> wordFrequencies, String filename, int maxWords) {
-		
-		try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
-           
-            writer.println("Word,Frequency");
-            
-           int count = 0;
-            for (String word: wordFrequencies.keySet()) {
-                writer.println(word + "," + wordFrequencies.get(word));
-                if (++count >= maxWords) {
+
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+
+			writer.write("Word,Frequency");
+			writer.newLine();
+
+			int count = 0;
+			for (String word : wordFrequencies.keySet()) {
+				writer.write(word + "," + wordFrequencies.get(word));
+				writer.newLine();
+
+				if (++count >= maxWords) {
 					break;
 				}
-            }
+			}
 
-            System.out.println("Die CSV-Datei wurde erfolgreich erstellt!");
+			System.out.println("Die CSV-Datei wurde erfolgreich erstellt!");
 
-        } catch (IOException e) {
-            System.err.println("Fehler beim Schreiben der Datei: " + e.getMessage());
-        }
-    }
+		} catch (IOException e) {
+			System.err.println("Fehler beim Schreiben der Datei: " + e.getMessage());
+		}
+	}
 }
-
-
-

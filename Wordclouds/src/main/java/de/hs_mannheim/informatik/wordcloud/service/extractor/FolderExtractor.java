@@ -7,22 +7,23 @@ public class FolderExtractor {
 
 	private FileValidater valid = new FileValidater();
 
-	public ArrayList<String> getAllFiles(String path) {
+	public ArrayList<String> getAllFiles(String path) throws Exception {
 		ArrayList<String> allFiles = new ArrayList<>();
 
 		File f = new File(path);
-		File[] files = f.listFiles();
+		
+			File[] files = f.listFiles();
+			for (File file : files) {
+				if (!valid.isValid(file.getAbsolutePath())) {
+					continue;
+				} else {
+					allFiles.add(file.getAbsolutePath());
 
-		for (File file : files) {
-			if (!valid.isValid(file.getAbsolutePath())) {
-				continue;
-			} else {
-				allFiles.add(file.getAbsolutePath());
+				}
 
 			}
-
-		}
 		
+
 		return allFiles;
 
 	}

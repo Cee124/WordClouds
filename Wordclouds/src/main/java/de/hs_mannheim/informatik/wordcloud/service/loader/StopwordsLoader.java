@@ -9,7 +9,7 @@ public class StopwordsLoader {
 		TxtTextExtractor extractor = new TxtTextExtractor();
 		String content = extractor.extractText(filename);
 
-		for (String w : content.split("\n")) {
+		for (String w : content.split("\\W+")) {
 			String word = w.trim().toLowerCase();
 			if (!word.isEmpty()) {
 				stopWords.addStopword(word);

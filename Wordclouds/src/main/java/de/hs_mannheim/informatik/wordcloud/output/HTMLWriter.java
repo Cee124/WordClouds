@@ -6,8 +6,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 public class HTMLWriter {
@@ -17,7 +15,7 @@ public class HTMLWriter {
 
 		ArrayList<String> lines = new ArrayList<>();
 
-		// HTML-Datei einlesen
+		
 		try (BufferedReader reader = new BufferedReader(new FileReader(outputHtmlPath))) {
 			String line;
 			while ((line = reader.readLine()) != null) {
@@ -27,23 +25,23 @@ public class HTMLWriter {
 			throw new IOException("Error reading the HTML-File: " + e.getMessage());
 		}
 
-		ArrayList<String> beforeTagCloud = new ArrayList<>();
+		ArrayList<String> beforePlaceHolder = new ArrayList<>();
 		
 		boolean foundPlaceholder = false;
 
 		for (String line : lines) {
 			if (!foundPlaceholder) {
-				beforeTagCloud.add(line);
+				beforePlaceHolder.add(line);
 				if (line.contains("<!-- TODO: Hier die generierten Tags einsetzen -->")) {
 					foundPlaceholder = true;
 				}
 			} 
 		}
 
-		// Datei neu schreiben
+		//Hier wird die Html überschrieben
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputHtmlPath))) {
-			// Alles vor dem Platzhalter schreiben
-			for (String line : beforeTagCloud) {
+			
+			for (String line : beforePlaceHolder) {
 				writer.write(line);
 				writer.newLine();
 			}

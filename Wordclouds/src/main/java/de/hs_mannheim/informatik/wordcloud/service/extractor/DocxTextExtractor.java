@@ -16,10 +16,11 @@ public class DocxTextExtractor {
 		StringBuilder text = new StringBuilder();
 		File file = new File(filename);
 		try (FileInputStream fis = new FileInputStream(file);
+				//Klasse aus Apache Poi-Bilbiothek, die zum Bearbeiten und Extrahieren von Inhalten aus Word-Dokumenten im  .docx Format dient
 				XWPFDocument document = new XWPFDocument(fis);
 				XWPFWordExtractor extractor = new XWPFWordExtractor(document)) {
 
-			// Extrahieren des Textes und Anhängen an StringBuilder
+			
 			text.append(extractor.getText().trim());
 
 		} catch (IOException e) {

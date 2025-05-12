@@ -13,17 +13,15 @@ import org.slf4j.LoggerFactory;
 
 public class FileProcessor {
 	private static final Logger logger = LoggerFactory.getLogger(FileProcessor.class);
-	private String filename;
+	private String folderPath;
 	private Stopwords stopwords;
 	private Tokenizer tokenizer;
-	private FileValidater validate;
 	private FolderExtractor folderExtract;
 	private WordFrequency wordFrequency;
 
-	public FileProcessor(String filename, Stopwords stopwords, String language) {
-		this.filename = filename;
+	public FileProcessor(String folderPath, Stopwords stopwords, String language) {
+		this.folderPath = folderPath;
 		this.stopwords = stopwords;
-		this.validate = new FileValidater();
 		this.wordFrequency = new WordFrequency();
 		this.tokenizer = new Tokenizer(stopwords, language, this.wordFrequency);
 		this.folderExtract = new FolderExtractor();
@@ -32,14 +30,9 @@ public class FileProcessor {
 	public void processFiles(String outputHtml, String outputCSV, boolean showFrequencies, int minimumFrequencies,
 			boolean sortFrequencies, boolean toLowercase, boolean groupWords, int maxWords) throws Exception {
 
-		ArrayList<String> allFiles = folderExtract.getAllFiles(filename);
+		ArrayList<String> allFiles = folderExtract.getAllFiles(folderPath);
 
 		for (String filepath : allFiles) {
-			if (!validate.isValid(filepath)) {
-				System.out.println("Ungültiges Dateiformat: " + filepath);
-				continue;
-			}
-
 			PickTextExtractor extractor = new PickTextExtractor();
 			String text = extractor.textExtractor(filepath);
 
@@ -81,7 +74,7 @@ public class FileProcessor {
 			text = text.toLowerCase();
 		}
 
-		String[] tokens = text.split("[^a-zA-ZäöüßÄÖÜ]+");
+		String[] tokens = text.split("[^a-zA-ZäöüßÄÖÜ\\-]+");
 
 		for (String token : tokens) {
 			if (token.isEmpty() || stopwords.isStopword(token)) {
@@ -101,11 +94,5 @@ public class FileProcessor {
 		this.stopwords = stopwords;
 	}
 
-	public String getFilename() {
-		return filename;
-	}
-
-	public void setFilename(String filename) {
-		this.filename = filename;
-	}
+	
 }

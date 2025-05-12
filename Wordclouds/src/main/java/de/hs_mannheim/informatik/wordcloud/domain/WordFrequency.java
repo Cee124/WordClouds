@@ -22,8 +22,7 @@ public class WordFrequency {
     }
 
 
-	
-	
+
 	public Map<String, Integer> getSortedWordFrequencies() {
 		return new TreeMap<>(wordFrequencies);
 	}
