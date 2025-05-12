@@ -7,15 +7,18 @@ import java.util.Map;
 
 public class CSVWriter {
 
-	public void writeWordFrequenciesToCSV(Map<String, Integer> wordFrequencies, String filename) {
+	public void writeWordFrequenciesToCSV(Map<String, Integer> wordFrequencies, String filename, int maxWords) {
 		
 		try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
            
             writer.println("Word,Frequency");
             
-           
+           int count = 0;
             for (String word: wordFrequencies.keySet()) {
                 writer.println(word + "," + wordFrequencies.get(word));
+                if (++count >= maxWords) {
+					break;
+				}
             }
 
             System.out.println("Die CSV-Datei wurde erfolgreich erstellt!");

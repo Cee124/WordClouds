@@ -78,7 +78,7 @@ public class HTMLWriter {
 			writer.write("</div>");
 			writer.newLine();
 			writer.write("</body></html>");
-
+			System.out.println("Die WordCloud wurde erfolgreich erstellt!");
 		} catch (IOException e) {
 			throw new IOException("Fehler beim Schreiben der Datei: " + e.getMessage());
 		}

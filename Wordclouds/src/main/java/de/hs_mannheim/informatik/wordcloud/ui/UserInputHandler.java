@@ -3,9 +3,10 @@ package de.hs_mannheim.informatik.wordcloud.ui;
 import java.io.File;
 import java.util.Scanner;
 
-import de.hs_mannheim.informatik.wordcloud.domain.Stopwords;
+
+
 import de.hs_mannheim.informatik.wordcloud.facade.WordCloudGenerator;
-import de.hs_mannheim.informatik.wordcloud.service.loader.StopwordsLoader;
+
 
 public class UserInputHandler {
 	private static final String outputHtmlPath = "C:\\Users\\chris\\git\\WordClouds-Repo\\WordClouds-Repo\\Wordclouds\\src\\main\\resources\\PR2Wordcloud.html";
@@ -144,8 +145,9 @@ public class UserInputHandler {
 			}
 			generator.generate(folderPath, outputHtmlPath, outputCSVPath, language, showFrequencies, minFreq, sortFreq,
 					toLowercase, groupWords, maxWords);
+			
 
-			System.out.println("Die WordCloud wurde erfolgreich erstellt!");
+			
 		} catch (Exception e) {
 			System.err.println("Fehler beim Erstellen der WordCloud: " + e.getMessage());
 			e.printStackTrace();

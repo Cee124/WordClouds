@@ -1,0 +1,22 @@
+
+FolderExtractor: https://www.java-forum.org/thema/ordner-auslesen.132005/ 
+
+OpenHTMLFile: Ich möchte in meinem WordCloud System nachdem ich die HTML erstellt habe diese mit Runtime.getRuntime().exec.(command) öffnen wie mache ich das?
+
+Sortierung: Ich habe aktuell zwei Maps (HashMap und TreeMap), um Wortfrequenzen sowohl unsortiert als auch alphabetisch sortiert zu speichern. Wie kann ich die alphabetische Sortierung direkt beim Zugriff erzeugen, ohne eine zweite Map zu pflegen?
+
+Umlaute und Zeilenumbrüche: Wie behandle ich Zeilenumbrüche und Wörter mit Umlauten korrekt bei einem String.split() in Java, sodass nur echte Wörter (inklusive ä, ö, ü, ß, etc.) erhalten bleiben? Gib mir dafür bitte einen passenden Ausdruck
+
+PPtx: "Ich möchte den Text aus einer PowerPoint-Datei (.pptx) in Java extrahieren. Kannst du mir ein komplettes Beispiel für das Einlesen der Datei und Extrahieren des Textes zeigen?"
+
+Docx: "Ich möchte den Text aus einer .docx-Datei in Java extrahieren. Kannst du mir ein komplettes Beispiel für das Einlesen der Datei und Extrahieren des Textes zeigen?"
+
+HTMLWriter: Wie kann ich beim Einlesen einer HTML-Datei den Inhalt bis zu einem bestimmten Platzhalter zwischenspeichern, damit ich später dort neuen Inhalt einfügen kann?
+
+CSVWriter: Ich benötige für mein WordCloud Projekt einen CSV-Writer, kannst du mir da helfen?
+
+Junit-Tests: Wie gehe ich vor, wenn ich in einem JUnit-Test mehrere Methoden einer Klasse testen möchte, aber diese Methoden jeweils andere Methoden der gleichen Klasse benötigen? Teste ich damit nicht gleichzeitig mehrere Methoden in einem einzelnen Test?
+
+JUnit-Test: Wie kann ich mit JUNIT die Reihenfolge einer TreeMap überprüfen, nachdem ich Wörter im Test hinzugefügt habe.
+
+Logger: Wie verwende ich einen Logger in mein MavenProjekt, gebe mir dafür alle Informationen. Ich möchte mit dem Logger letzlich die Gesamtanzahl der Wörter und die Anzahl der verschiedenen Wörter aus meiner Map<String,Integer> ausgeben lassen 

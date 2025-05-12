@@ -1,7 +1,6 @@
 package de.hs_mannheim.informatik.wordcloud.output;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 import de.hs_mannheim.informatik.wordcloud.domain.Stopwords;
@@ -9,9 +8,11 @@ import de.hs_mannheim.informatik.wordcloud.domain.Tokenizer;
 import de.hs_mannheim.informatik.wordcloud.domain.WordFrequency;
 import de.hs_mannheim.informatik.wordcloud.service.extractor.*;
 import de.hs_mannheim.informatik.wordcloud.service.tokenizer.LuceneTokenizer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class FileProcessor {
-
+	private static final Logger logger = LoggerFactory.getLogger(FileProcessor.class);
 	private String filename;
 	private Stopwords stopwords;
 	private Tokenizer tokenizer;
@@ -61,9 +62,18 @@ public class FileProcessor {
 
 		HTMLWriter htmlWriter = new HTMLWriter();
 		CSVWriter csvWriter = new CSVWriter();
-		csvWriter.writeWordFrequenciesToCSV(wordFrequencies, outputCSV);
+		csvWriter.writeWordFrequenciesToCSV(wordFrequencies, outputCSV, maxWords);
 		htmlWriter.writeTagCloud(outputHtml, wordFrequencies, showFrequencies, minimumFrequencies, maxWords);
-		
+		int totalWords = 0;
+		for (int freq : wordFrequencies.values()) {
+		    totalWords += freq;
+		}
+
+		int uniqueWords = wordFrequencies.size();
+		System.out.println();
+		logger.info("STATISTIK:");
+		logger.info("Gesamtzahl der Wörter: " + totalWords);
+		logger.info("Anzahl unterschiedlicher Wörter: " + uniqueWords);
 	}
 
 	private void processWithoutStemming(String text, boolean toLowercase) {
