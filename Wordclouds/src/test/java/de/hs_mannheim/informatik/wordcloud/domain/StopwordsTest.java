@@ -14,12 +14,16 @@ class StopwordsTest {
 		stopword = new Stopwords();
 	}
 
+	void testeStopwordsKonstruktor() {
+		assertTrue(stopword.getStopwords().isEmpty()); 
+	}
+
 	@Test
 	void testeAddStopwords() {
-		
+
 		stopword.addStopword("Hallo");
-		assertNotNull(stopword.getStopwords()); 
-		assertTrue(stopword.getStopwords().contains("hallo")); 
+		assertNotNull(stopword.getStopwords());
+		assertTrue(stopword.getStopwords().contains("hallo"));
 	}
 
 	@Test
@@ -27,7 +31,6 @@ class StopwordsTest {
 		stopword.addStopword("Hallo");
 		stopword.addStopword("Beispiel");
 
-		
 		assertTrue(stopword.getStopwords().contains("hallo"));
 		assertTrue(stopword.getStopwords().contains("beispiel"));
 	}
@@ -36,7 +39,6 @@ class StopwordsTest {
 	void testeIsStopword() {
 		stopword.addStopword("Hallo");
 
-		
 		assertTrue(stopword.isStopword("hallo"));
 		assertFalse(stopword.isStopword("Beispiel"));
 	}

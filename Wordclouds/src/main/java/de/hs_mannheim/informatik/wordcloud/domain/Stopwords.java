@@ -27,4 +27,5 @@ public class Stopwords {
 	public boolean isStopword(String word) {
 		return stopwords.contains(word.toLowerCase());
 	}
+	
 }

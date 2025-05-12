@@ -49,7 +49,7 @@ class WordFrequencyTest {
 
 		wordFrequency.addFrequencies("Apfel");
 		wordFrequency.addFrequencies("Zitrone");
-		wordFrequency.addFrequencies("Birne");
+		wordFrequency.addFrequencies("Banane");
 	
 		Map<String, Integer> sortedMap = wordFrequency.getSortedWordFrequencies();
 		List<String> expectedOrder = List.of("Apfel", "Banane", "Zitrone");

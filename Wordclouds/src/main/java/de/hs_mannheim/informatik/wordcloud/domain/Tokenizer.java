@@ -19,23 +19,16 @@ public class Tokenizer {
 		return wordFrequency;
 	}
 
-	public void setWordFrequency(WordFrequency wordFrequency) {
-		this.wordFrequency = wordFrequency;
-	}
+	
 
 	public String getLanguage() {
 		return language;
 	}
 
-	public void setLanguage(String language) {
-		this.language = language;
-	}
 
 	public Stopwords getStopwords() {
 		return stopwords;
 	}
 
-	public void setStopwords(Stopwords stopwords) {
-		this.stopwords = stopwords;
-	}
+	
 }
