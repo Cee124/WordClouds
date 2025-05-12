@@ -28,7 +28,7 @@ public class HTMLWriter {
 		}
 
 		ArrayList<String> beforeTagCloud = new ArrayList<>();
-		ArrayList<String> afterTagCloud = new ArrayList<>();
+		
 		boolean foundPlaceholder = false;
 
 		for (String line : lines) {
@@ -37,9 +37,7 @@ public class HTMLWriter {
 				if (line.contains("<!-- TODO: Hier die generierten Tags einsetzen -->")) {
 					foundPlaceholder = true;
 				}
-			} else {
-				afterTagCloud.add(line);
-			}
+			} 
 		}
 
 		// Datei neu schreiben

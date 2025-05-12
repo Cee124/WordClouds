@@ -3,7 +3,7 @@ package de.hs_mannheim.informatik.wordcloud.facade;
 import de.hs_mannheim.informatik.wordcloud.domain.Stopwords;
 
 import de.hs_mannheim.informatik.wordcloud.output.FileProcessor;
-import de.hs_mannheim.informatik.wordcloud.service.loader.StopwordsLoader;
+
 
 public class WordCloudGenerator {
 

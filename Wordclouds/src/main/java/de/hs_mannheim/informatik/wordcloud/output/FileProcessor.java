@@ -59,8 +59,6 @@ public class FileProcessor {
 			wordFrequencies = wordFrequency.getWordFrequencies();
 		}
 
-	
-
 		HTMLWriter writer = new HTMLWriter();
 		writer.writeTagCloud(outputHtml, wordFrequencies, showFrequencies, minimumFrequencies, maxWords);
 		
@@ -71,7 +69,7 @@ public class FileProcessor {
 			text = text.toLowerCase();
 		}
 
-		String[] tokens = text.split("[^\\p{IsAlphabetic}]+");
+		String[] tokens = text.split("[^a-zA-ZäöüßÄÖÜ]+");
 
 		for (String token : tokens) {
 			if (token.isEmpty() || stopwords.isStopword(token)) {
