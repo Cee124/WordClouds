@@ -28,7 +28,7 @@ public class FileProcessor {
 		this.folderExtract = new FolderExtractor();
 	}
 
-	public void processFiles(String outputHtml, boolean showFrequencies, int minimumFrequencies,
+	public void processFiles(String outputHtml, String outputCSV, boolean showFrequencies, int minimumFrequencies,
 			boolean sortFrequencies, boolean toLowercase, boolean groupWords, int maxWords) throws Exception {
 
 		ArrayList<String> allFiles = folderExtract.getAllFiles(filename);
@@ -59,8 +59,10 @@ public class FileProcessor {
 			wordFrequencies = wordFrequency.getWordFrequencies();
 		}
 
-		HTMLWriter writer = new HTMLWriter();
-		writer.writeTagCloud(outputHtml, wordFrequencies, showFrequencies, minimumFrequencies, maxWords);
+		HTMLWriter htmlWriter = new HTMLWriter();
+		CSVWriter csvWriter = new CSVWriter();
+		csvWriter.writeWordFrequenciesToCSV(wordFrequencies, outputCSV);
+		htmlWriter.writeTagCloud(outputHtml, wordFrequencies, showFrequencies, minimumFrequencies, maxWords);
 		
 	}
 

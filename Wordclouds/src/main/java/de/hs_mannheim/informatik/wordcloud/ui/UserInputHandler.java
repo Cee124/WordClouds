@@ -9,7 +9,9 @@ import de.hs_mannheim.informatik.wordcloud.service.loader.StopwordsLoader;
 
 public class UserInputHandler {
 	private static final String outputHtmlPath = "C:\\Users\\chris\\git\\WordClouds-Repo\\WordClouds-Repo\\Wordclouds\\src\\main\\resources\\PR2Wordcloud.html";
-	private static final String stopwordsFile = "C:\\\\Users\\\\chris\\\\eclipse-workspace\\\\WordCloud\\\\src\\\\main\\\\resources\\\\stopwords.txt"; 
+	private static final String stopwordsFile = "C:\\\\Users\\\\chris\\\\eclipse-workspace\\\\WordCloud\\\\src\\\\main\\\\resources\\\\stopwords.txt";
+	private static final String outputCSVPath = "C:\\Users\\chris\\git\\WordClouds-Repo\\WordClouds-Repo\\Wordclouds\\src\\main\\resources\\WordFrequencies.csv";
+
 	public void startFromConsole() {
 		Scanner in = new Scanner(System.in);
 		try {
@@ -113,18 +115,6 @@ public class UserInputHandler {
 				}
 			}
 
-			Stopwords stopwords = new Stopwords();
-			StopwordsLoader.loadStopwordsFromFile(stopwordsFile, stopwords);
-			while (true) {
-				System.out.print("Gebe Stopwörter ein. Die Eingabe wird beendet, wenn du '1' eingibst: ");
-				String line = in.nextLine();
-				if (line.equals("1")) {
-					System.out.println("Stopwörter hinzugefügt.");
-					break;
-				}
-				stopwords.getStopwords().add(line.trim());
-			}
-
 			int maxWords;
 			while (true) {
 				System.out.print("Gebe die Anzahl der Wörter an, die angezeigt werden sollen: ");
@@ -142,7 +132,17 @@ public class UserInputHandler {
 			}
 
 			WordCloudGenerator generator = new WordCloudGenerator();
-			generator.generate(folderPath, stopwords, outputHtmlPath, language, showFrequencies, minFreq, sortFreq,
+			generator.loadStopwords(stopwordsFile);
+			while (true) {
+				System.out.print("Gebe Stopwörter ein. Die Eingabe wird beendet, wenn du '1' eingibst: ");
+				String line = in.nextLine();
+				if (line.equals("1")) {
+					System.out.println("Stopwörter hinzugefügt.");
+					break;
+				}
+				generator.addStopword(line.trim());
+			}
+			generator.generate(folderPath, outputHtmlPath, outputCSVPath, language, showFrequencies, minFreq, sortFreq,
 					toLowercase, groupWords, maxWords);
 
 			System.out.println("Die WordCloud wurde erfolgreich erstellt!");

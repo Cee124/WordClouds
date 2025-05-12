@@ -6,10 +6,10 @@ import java.util.ArrayList;
 
 public class Stopwords {
 
-	private ArrayList<String> stopwords;
+	private ArrayList<String> stopwordsListe;
 
 	public Stopwords() {
-		stopwords = new ArrayList<>();
+		stopwordsListe = new ArrayList<>();
 	}
 
 
@@ -17,15 +17,15 @@ public class Stopwords {
 	
 
 	public ArrayList<String> getStopwords() {
-		return stopwords;
+		return stopwordsListe;
 	}
 	
 	public void addStopword(String word) {
-		stopwords.add(word.toLowerCase());
+		stopwordsListe.add(word.toLowerCase());
 	}
 	
 	public boolean isStopword(String word) {
-		return stopwords.contains(word.toLowerCase());
+		return stopwordsListe.contains(word.toLowerCase());
 	}
 	
 }
