@@ -8,9 +8,9 @@ import org.apache.poi.xslf.usermodel.XSLFShape;
 import org.apache.poi.xslf.usermodel.XSLFSlide;
 import org.apache.poi.xslf.usermodel.XSLFTextShape;
 
-public class PptxTextExtractor implements TextExtractor{
+public class PptxTextExtractor {
 
-	@Override
+	
 	public String extractText(String filename) throws Exception {
 		File file = new File((filename));
 		StringBuilder textBuilder = new StringBuilder();
@@ -27,7 +27,7 @@ public class PptxTextExtractor implements TextExtractor{
             }
 
         } catch (IOException e) {
-        	throw new Exception("Fehler beim Extrahieren von Text aus der PDF-Datei: " + filename, e);
+        	throw new Exception("Error extracting the text from the Pptx-File: " + filename, e);
         }
 
         return textBuilder.toString();

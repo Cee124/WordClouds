@@ -5,9 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class TxtTextExtractor implements TextExtractor {
-
-	@Override
+public class TxtTextExtractor {
 	public String extractText(String filename) throws Exception {
 		File file = new File(filename);
 		StringBuilder content = new StringBuilder();
@@ -18,9 +16,9 @@ public class TxtTextExtractor implements TextExtractor {
 			}
 
 		} catch (IOException e) {
-			throw new Exception("Fehler beim Lesen der Datei: " + filename, e);
+			throw new Exception("Error extracting the text from the txt-File: " + filename, e);
 		}
-		
+
 		return content.toString();
 
 	}

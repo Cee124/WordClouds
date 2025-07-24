@@ -7,25 +7,28 @@ import java.io.IOException;
 import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
-import de.hs_mannheim.informatik.wordcloud.domain.TextExtractor;
 
-public class DocxTextExtractor implements TextExtractor {
 
-	@Override
-	public String extractText(File file) throws Exception {
+public class DocxTextExtractor {
+
+	
+	public String extractText(String filename) throws Exception {
 		StringBuilder text = new StringBuilder();
-
+		File file = new File(filename);
 		try (FileInputStream fis = new FileInputStream(file);
+				//Klasse aus Apache Poi-Bilbiothek, die zum Bearbeiten und Extrahieren von Inhalten aus Word-Dokumenten im  .docx Format dient
 				XWPFDocument document = new XWPFDocument(fis);
 				XWPFWordExtractor extractor = new XWPFWordExtractor(document)) {
 
-			// Extrahieren des Textes und Anhängen an StringBuilder
+			
 			text.append(extractor.getText().trim());
 
 		} catch (IOException e) {
-			throw new Exception("Fehler beim Extrahieren des Textes aus der DOCX-Datei: " + file.getName(), e);
+			throw new Exception("Error extracting the text from the Docx-File: " + filename, e);
 		}
 
 		return text.toString();
 	}
+
+	
 }
