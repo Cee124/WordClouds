@@ -10,7 +10,7 @@ public class StopwordsLoader {
 		String content = extractor.extractText(filename);
 
 		for (String w : content.split("\\W+")) {
-			String word = w.trim().toLowerCase();
+			String word = w;
 			if (!word.isEmpty()) {
 				stopWords.addStopword(word);
 			}

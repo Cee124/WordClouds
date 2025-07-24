@@ -58,6 +58,7 @@ public class FileProcessor {
 		csvWriter.writeWordFrequenciesToCSV(wordFrequencies, outputCSV, maxWords);
 		htmlWriter.writeTagCloud(outputHtml, wordFrequencies, showFrequencies, minimumFrequencies, maxWords);
 		int totalWords = 0;
+		
 		for (int freq : wordFrequencies.values()) {
 		    totalWords += freq;
 		}
